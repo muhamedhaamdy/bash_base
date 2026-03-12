@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DB_ROOT="./dataBases"
+export database_name="your_connected_db"
 main() {
 
     source ./databaseController/create_database.sh
