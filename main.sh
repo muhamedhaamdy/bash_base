@@ -2,10 +2,16 @@
 
 main() {
 
+    source ./databaseController/create_database.sh
+    source ./databaseController/list_database.sh
+    source ./databaseController/connect_database.sh
+    source ./databaseController/delete_database.sh
+
     rows=$(tput lines)
     term_cols=$(tput cols)
 
     DB_ROOT="./Databases"
+    current_db=""
     valid_string="^[a-zA-Z][a-zA-Z0-9_]*$"
 
     mkdir -p "$DB_ROOT"
@@ -83,16 +89,16 @@ main() {
 
         case $choice in
             1)
-                read -p "  Press Enter to continue..."
+                create_database
                 ;;
             2)
-                read -p "  Press Enter to continue..."
+                list_databases
                 ;;
             3)
-                read -p "  Press Enter to continue..."
+                connect_database;
                 ;;
             4)
-                 read -p "  Press Enter to continue..."
+                delete_database;
                 ;;
             5)
                 clear
