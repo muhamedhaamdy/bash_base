@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "weolcome to the initial DBMS developed in bahs"
+export DB_ROOT="./dataBases"
+export database_name="your_connected_db"
