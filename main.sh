@@ -3,7 +3,7 @@
 export DB_ROOT="./dataBases"
 export database_name="your_connected_db"
 main() {
-
+    source ./helpers.sh
     source ./databaseController/create_database.sh
     source ./databaseController/list_database.sh
     source ./databaseController/connect_database.sh
@@ -112,7 +112,7 @@ main() {
                 ;;
             *)
                 tput setaf 1
-                center "  ✘  Invalid choice — please enter 1 to 5."
+                center "  !  Invalid choice — please enter 1 to 5."
                 tput sgr0
                 read -p "  Press Enter to continue..."
                 ;;

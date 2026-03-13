@@ -19,34 +19,22 @@ connect_database() {
     read db_name
     echo ""
 
-    if [[ -z "$db_name" ]]; then
-        tput setaf 1; tput bold
-        center "✘  Database name cannot be empty."
-        tput sgr0
-        read -p "  Press Enter to continue..."
-        return
-    fi
+    # Validate: not empty and matches naming rules
+    _is_not_empty "$db_name" "Database name" || return
+    _is_valid_identifier "$db_name" "Database name" || return
 
-    # Validate: matches naming rules
-    if [[ ! "$db_name" =~ $valid_string ]]; then
+    if ! _directory_exists "$DB_ROOT/$db_name"; then
         tput setaf 1; tput bold
-        center "✘  Invalid name. Must start with a letter and contain only letters, digits, or underscores."
-        tput sgr0
-        read -p "  Press Enter to continue..."
-        return
-    fi
-
-    if [[ ! -d "$DB_ROOT/$db_name" ]]; then
-        tput setaf 1; tput bold
-        center "✘  Database '$db_name' does not exist."
+        center "  Database '$db_name' does not exist."
         tput sgr0
         read -p "  Press Enter to continue..."
         return
     fi
 
     current_db="$db_name"
+    database_name="$db_name"
     tput setaf 2; tput bold
-    center "✔  Connected to database '$current_db' successfully"
+    center "  Connected to database '$current_db' successfully"
     tput sgr0
 
     # Call the table menu loop

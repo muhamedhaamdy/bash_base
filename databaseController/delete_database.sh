@@ -17,25 +17,13 @@ delete_database() {
     read db_name
     echo ""
 
-    if [[ -z "$db_name" ]]; then
-        tput setaf 1; tput bold
-        center "✘  Database name cannot be empty."
-        tput sgr0
-        read -p "  Press Enter to continue..."
-        return
-    fi
+    # Validate: not empty and matches naming rules
+    _is_not_empty "$db_name" "Database name" || return
+    _is_valid_identifier "$db_name" "Database name" || return
 
-    if [[ ! "$db_name" =~ $valid_string ]]; then
+    if ! _directory_exists "$DB_ROOT/$db_name"; then
         tput setaf 1; tput bold
-        center "✘  Invalid name. Must start with a letter and contain only letters, digits, or underscores."
-        tput sgr0
-        read -p "  Press Enter to continue..."
-        return
-    fi
-
-    if [[ ! -d "$DB_ROOT/$db_name" ]]; then
-        tput setaf 1; tput bold
-        center "✘  Database '$db_name' does not exist."
+        center "  Database '$db_name' does not exist."
         tput sgr0
         read -p "  Press Enter to continue..."
         return
@@ -43,7 +31,7 @@ delete_database() {
 
     if [[ "$current_db" == "$db_name" ]]; then
         tput setaf 1; tput bold
-        center "✘  Cannot delete the current database."
+        center "  Cannot delete the current database."
         tput sgr0
         read -p "  Press Enter to continue..."
         return
@@ -54,12 +42,12 @@ delete_database() {
     if [[ "$confirm" == "y" ]]; then
         rm -rf "$DB_ROOT/$db_name"
         tput setaf 2; tput bold
-        center "✔  Database '$db_name' deleted successfully!"
+        center "  Database '$db_name' deleted successfully!"
         tput sgr0
         read -p "  Press Enter to continue..."
     else
         tput setaf 1; tput bold
-        center "✘  Database deletion cancelled."
+        center "  Database deletion cancelled."
         tput sgr0
         read -p "  Press Enter to continue..."
     fi

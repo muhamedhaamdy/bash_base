@@ -86,7 +86,7 @@ table_menu() {
                 ;;
             *)
                 tput setaf 1
-                center "  ✘  Invalid choice — please enter 1 to 8."
+                center "  !  Invalid choice — please enter 1 to 8."
                 tput sgr0
                 read -p "  Press Enter to continue..."
                 ;;
