@@ -1,6 +1,8 @@
-!#/bin/bash
+#!/bin/bash
 
 connect_database() {
+    source "./tableController/table_menu.sh"
+
     echo ""
     tput setaf 6; tput bold
     center "╔══════════════════════════════════════╗"
@@ -12,7 +14,7 @@ connect_database() {
     # Prompt for database name
     printf "%*s" $(( (term_cols - 30) / 2 )) ""
     tput setaf 3; tput bold
-    printf "Enter Database Name ➜  "
+    printf "Enter Database Name :  "
     tput sgr0
     read db_name
     echo ""
@@ -46,5 +48,7 @@ connect_database() {
     tput setaf 2; tput bold
     center "✔  Connected to database '$current_db' successfully"
     tput sgr0
-    read -p "  Press Enter to continue..."
+
+    # Call the table menu loop
+    table_menu
 }

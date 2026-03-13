@@ -13,7 +13,6 @@ main() {
     term_cols=$(tput cols)
 
     DB_ROOT="./Databases"
-    current_db=""
     valid_string="^[a-zA-Z][a-zA-Z0-9_]*$"
 
     mkdir -p "$DB_ROOT"
@@ -83,7 +82,7 @@ main() {
         echo ""
         printf "%*s" $(( (term_cols - 10) / 2 )) ""
         tput setaf 6; tput bold
-        printf "Choice ➜  "
+        printf "Choice :  "
         tput sgr0
         read choice
 
@@ -97,10 +96,10 @@ main() {
                 list_databases
                 ;;
             3)
-                connect_database;
+                connect_database
                 ;;
             4)
-                delete_database;
+                delete_database
                 ;;
             5)
                 clear

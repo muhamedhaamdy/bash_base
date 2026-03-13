@@ -12,7 +12,7 @@ delete_database() {
 
     printf "%*s" $(( (term_cols - 30) / 2 )) ""
     tput setaf 3; tput bold
-    printf "Enter Database Name ➜  "
+    printf "Enter Database Name :  "
     tput sgr0
     read db_name
     echo ""
