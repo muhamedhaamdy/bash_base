@@ -21,7 +21,7 @@ list_databases() {
     # Check if any databases exist
     if [[ ${#dbs[@]} -eq 0 ]]; then
         tput setaf 1; tput bold
-        center "✘  No databases found."
+        center "  No databases found."
         tput sgr0
         read -p "  Press Enter to continue..."
         return

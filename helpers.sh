@@ -32,3 +32,64 @@ _parse_schema() {
         (( i++ ))
     done < "$meta_file"
 }
+
+# Check if a string is empty
+_is_not_empty() {
+    local value="$1"
+    local field_name="${2:-Field}"
+    if [[ -z "$value" ]]; then
+        tput setaf 1; tput bold
+        center "  $field_name cannot be empty."
+        tput sgr0
+        read -p "  Press Enter to continue..."
+        return 1
+    fi
+    return 0
+}
+
+# Check if a string is a valid identifier (starts with letter, contains A-Z, 0-9, _)
+_is_valid_identifier() {
+    local value="$1"
+    local field_name="${2:-Name}"
+    if [[ ! "$value" =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]; then
+        tput setaf 1; tput bold
+        center "  Invalid $field_name. Must start with a letter and contain only letters, digits, or underscores."
+        tput sgr0
+        read -p "  Press Enter to continue..."
+        return 1
+    fi
+    return 0
+}
+
+# Check if a number is a positive integer (> 0)
+_is_positive_integer() {
+    local value="$1"
+    if ! [[ "$value" =~ ^[1-9][0-9]*$ ]]; then
+        tput setaf 1; tput bold
+        center "  Invalid number. Must be an integer greater than 0."
+        tput sgr0
+        read -p "  Press Enter to continue..."
+        return 1
+    fi
+    return 0
+}
+
+# Check if a directory exists
+_directory_exists() {
+    local dir_path="$1"
+    if [[ -d "$dir_path" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Check if a file exists
+_file_exists() {
+    local file_path="$1"
+    if [[ -f "$file_path" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}

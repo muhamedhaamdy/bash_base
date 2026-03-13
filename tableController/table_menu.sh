@@ -1,40 +1,7 @@
 #!/bin/bash
 
-export DB_ROOT="./dataBases"
-export database_name="your_connected_db"
-main() {
-    source ./helpers.sh
-    source ./databaseController/create_database.sh
-    source ./databaseController/list_database.sh
-    source ./databaseController/connect_database.sh
-    source ./databaseController/delete_database.sh
-
-    rows=$(tput lines)
-    term_cols=$(tput cols)
-
-    DB_ROOT="./Databases"
-    valid_string="^[a-zA-Z][a-zA-Z0-9_]*$"
-
-    mkdir -p "$DB_ROOT"
-
-
-    center() {
-        local text="$1"
-        local clean_text
-        clean_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
-        local padding=$(( (term_cols - ${#clean_text}) / 2 ))
-        (( padding < 0 )) && padding=0
-        printf "%*s%s\n" "$padding" "" "$text"
-    }
-
-    RED=$(tput setaf 1)
-    YELLOW=$(tput setaf 3)
-    CYAN=$(tput setaf 6)
-    WHITE=$(tput setaf 7)
-    BOLD=$(tput bold)
-    RESET=$(tput sgr0)
-
-
+table_menu() {
+    source "../tableController/create_table.sh"
     while true; do
         clear
 
@@ -56,19 +23,22 @@ main() {
 
         tput setaf 6
         center "╔══════════════════════════════════════╗"
-        center "║           ⚡  MAIN  MENU  ⚡           ║"
+        center "║           ⚡  TABLE  MENU  ⚡           ║"
         center "╠══════════════════════════════════════╣"
         tput sgr0
 
         tput setaf 7
         center "║                                      ║"
-        center "║   $(tput setaf 3)[1]$(tput setaf 7)  Create Database               ║"
-        center "║   $(tput setaf 3)[2]$(tput setaf 7)  List Databases                ║"
-        center "║   $(tput setaf 3)[3]$(tput setaf 7)  Connect to Database           ║"
-        center "║   $(tput setaf 3)[4]$(tput setaf 7)  Drop Database                 ║"
+        center "║   $(tput setaf 3)[1]$(tput setaf 7)  Create Table              ║"
+        center "║   $(tput setaf 3)[2]$(tput setaf 7)  List Tables               ║"
+        center "║   $(tput setaf 3)[3]$(tput setaf 7)  Drop Table                ║"
+        center "║   $(tput setaf 3)[4]$(tput setaf 7)  Insert into Table         ║"
+        center "║   $(tput setaf 3)[5]$(tput setaf 7)  Select from Table         ║"
+        center "║   $(tput setaf 3)[6]$(tput setaf 7)  Update Table Data         ║"
+        center "║   $(tput setaf 3)[7]$(tput setaf 7)  Delete from Table         ║"
         center "║                                      ║"
         tput setaf 1
-        center "║   $(tput setaf 1)[5]$(tput setaf 7)  Exit                          ║"
+        center "║   $(tput setaf 1)[8]$(tput setaf 7)  Back to Main Menu         ║"
         center "║                                      ║"
         tput setaf 6
         center "╚══════════════════════════════════════╝"
@@ -90,34 +60,36 @@ main() {
 
         case $choice in
             1)
-                create_database
+                create_table
                 ;;
             2)
-                list_databases
+                read -p "  Press Enter to continue..."
                 ;;
             3)
-                connect_database
+                read -p "  Press Enter to continue..."
                 ;;
             4)
-                delete_database
+                 read -p "  Press Enter to continue..."
                 ;;
             5)
-                clear
-                tput setaf 6; tput bold
-                center ""
-                center "  Thanks for using ShellBase. Goodbye!  "
-                center ""
-                tput sgr0
-                exit 0
+                 read -p "  Press Enter to continue..."
+                ;;
+            6)
+                 read -p "  Press Enter to continue..."
+                ;;
+            7)
+                 read -p "  Press Enter to continue..."
+                ;;
+            8)
+                current_db=''
+                return
                 ;;
             *)
                 tput setaf 1
-                center "  !  Invalid choice — please enter 1 to 5."
+                center "  !  Invalid choice — please enter 1 to 8."
                 tput sgr0
                 read -p "  Press Enter to continue..."
                 ;;
         esac
     done
 }
-
-main
