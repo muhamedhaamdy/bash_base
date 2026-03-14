@@ -114,4 +114,25 @@ _valid_constraint() {
         return 1
     fi
     return 0
+
+# Print column names
+_print_headers() {
+    local IFS=:
+    echo "${columns[*]}"
+}
+
+# Get 1-based awk index of a column by name, returns 1 on fail
+_col_index() {
+    local col_name="$1"
+    for i in "${!columns[@]}"; do
+        [[ "${columns[$i]}" == "$col_name" ]] && echo $((i + 1)) && return 0
+    done
+    return 1
+}
+
+# Print in columns
+_display_results() {
+    local header="$1" body="$2"
+    [[ -z "$body" ]] && center " No records found." && return
+    { echo "$header"; echo "$body"; } | column -t -s:
 }
