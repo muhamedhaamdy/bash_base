@@ -15,4 +15,7 @@ list_tables() {
 
     $found || center "No tables found."
     center "||=================================||"
+    # for file in "$DB_ROOT/$database_name/"*.data; do
+    #     echo "$(basename "$file")"
+    # done
 }

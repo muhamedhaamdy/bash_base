@@ -69,12 +69,14 @@ table_menu() {
         case $choice in
             1)
                 create_table
+                read -p "  Press Enter to continue..."
                 ;;
             2)
                 list_tables
                 read -p "  Press Enter to continue..."
                 ;;
             3)
+                drop_table
                 read -p "  Press Enter to continue..."
                 ;;
             4)
