@@ -1,7 +1,15 @@
 #!/bin/bash
 
 table_menu() {
-    source "../tableController/create_table.sh"
+    local DIR="$(dirname "${BASH_SOURCE[0]}")"
+    
+    source "$DIR/create_table.sh" 2>/dev/null
+    source "$DIR/insert.sh"       
+    source "$DIR/list_tables.sh"   
+    source "$DIR/delete.sh"
+    source "$DIR/select.sh"
+    
+    
     while true; do
         clear
 
@@ -63,22 +71,26 @@ table_menu() {
                 create_table
                 ;;
             2)
+                list_tables
                 read -p "  Press Enter to continue..."
                 ;;
             3)
                 read -p "  Press Enter to continue..."
                 ;;
             4)
-                 read -p "  Press Enter to continue..."
+                insert_into_table
+                read -p "  Press Enter to continue..."
                 ;;
             5)
-                 read -p "  Press Enter to continue..."
+                select_from_table
+                read -p "  Press Enter to continue..."
                 ;;
             6)
                  read -p "  Press Enter to continue..."
                 ;;
             7)
-                 read -p "  Press Enter to continue..."
+                delete_from_table
+                read -p "  Press Enter to continue..."
                 ;;
             8)
                 current_db=''
