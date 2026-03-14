@@ -1,6 +1,8 @@
 #!/bin/bash
 
 create_table(){
+    source "$DIR/../helpers.sh"
+
     echo ""
     tput setaf 6; tput bold
     center "╔══════════════════════════════════════╗"

@@ -114,6 +114,7 @@ _valid_constraint() {
         return 1
     fi
     return 0
+}
 
 # Print column names
 _print_headers() {
