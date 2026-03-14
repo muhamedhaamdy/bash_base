@@ -1,6 +1,8 @@
 #!/bin/bash
-source "../helpers.sh"
-source "./tableController/list_tables.sh"
+DIR="$(dirname "${BASH_SOURCE[0]}")"
+
+source "$DIR/../helpers.sh"
+source "$DIR/list_tables.sh"
 
 #  Main insert function 
 insert_into_table() {
