@@ -3,9 +3,10 @@
 table_menu() {
     local DIR="$(dirname "${BASH_SOURCE[0]}")"
     
-    source "$DIR/create_table.sh" 2>/dev/null
-    source "$DIR/insert.sh"       
     source "$DIR/list_tables.sh"   
+    source "$DIR/create_table.sh"
+    source "$DIR/drop_table.sh"
+    source "$DIR/insert.sh"       
     source "$DIR/delete.sh"
     source "$DIR/select.sh"
     
