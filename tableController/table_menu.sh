@@ -1,7 +1,9 @@
 #!/bin/bash
 
 table_menu() {
-    source "../tableController/create_table.sh"
+    source "./tableController/create_table.sh"
+    source "./tableController/list_tables.sh"
+    source "./tableController/drop_table.sh"
     while true; do
         clear
 
@@ -61,11 +63,14 @@ table_menu() {
         case $choice in
             1)
                 create_table
+                read -p "  Press Enter to continue..."
                 ;;
             2)
+                list_tables
                 read -p "  Press Enter to continue..."
                 ;;
             3)
+                drop_table
                 read -p "  Press Enter to continue..."
                 ;;
             4)

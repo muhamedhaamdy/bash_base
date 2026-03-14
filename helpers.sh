@@ -93,3 +93,25 @@ _file_exists() {
         return 1
     fi
 }
+
+_valid_type() {
+    if [[ "$1" != "int" && "$1" != "float" && "$1" != "str" && "$1" != "bool" ]]; then
+        tput setaf 1; tput bold
+        center "  Invalid type. Must be 'int', 'float', or 'str'."
+        tput sgr0
+        read -p "  Press Enter to continue..."
+        return 1
+    fi
+    return 0
+}
+
+_valid_constraint() {
+    if [[ "$1" != "PK" && "$1" != "FK" && "$1" != "UNIQUE" && "$1" != "NOT NULL" && "$1" != "" ]]; then
+        tput setaf 1; tput bold
+        center "  Invalid constraint. Must be 'PK', 'FK', 'UNIQUE', or 'NOT NULL'."
+        tput sgr0
+        read -p "  Press Enter to continue..."
+        return 1
+    fi
+    return 0
+}
