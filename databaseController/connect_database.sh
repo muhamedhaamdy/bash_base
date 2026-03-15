@@ -1,8 +1,9 @@
 #!/bin/bash
 
-connect_database() {
-    source "./tableController/table_menu.sh"
+DIR="$(dirname "${BASH_SOURCE[0]}")"
+source "$DIR/../tableController/table_menu.sh"
 
+connect_database() {
     echo ""
     tput setaf 6; tput bold
     center "╔══════════════════════════════════════╗"
@@ -10,8 +11,7 @@ connect_database() {
     center "╚══════════════════════════════════════╝"
     tput sgr0
     echo ""
-    
-    # Prompt for database name
+
     printf "%*s" $(( (term_cols - 30) / 2 )) ""
     tput setaf 3; tput bold
     printf "Enter Database Name :  "
@@ -19,8 +19,7 @@ connect_database() {
     read db_name
     echo ""
 
-    # Validate: not empty and matches naming rules
-    _is_not_empty "$db_name" "Database name" || return
+    _is_not_empty "$db_name"       "Database name" || return
     _is_valid_identifier "$db_name" "Database name" || return
 
     if ! _directory_exists "$DB_ROOT/$db_name"; then
@@ -31,12 +30,11 @@ connect_database() {
         return
     fi
 
-    current_db="$db_name"
     database_name="$db_name"
-    tput setaf 2; tput bold
-    center "  Connected to database '$current_db' successfully"
-    tput sgr0
 
-    # Call the table menu loop
+    tput setaf 2; tput bold
+    center "  Connected to database '$database_name' successfully"
+    tput sgr0
+    sleep 1.5
     table_menu
 }

@@ -8,6 +8,7 @@ main() {
     source ./databaseController/list_database.sh
     source ./databaseController/connect_database.sh
     source ./databaseController/delete_database.sh
+    
 
     rows=$(tput lines)
     term_cols=$(tput cols)

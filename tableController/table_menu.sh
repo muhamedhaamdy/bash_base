@@ -9,7 +9,8 @@ table_menu() {
     source "$DIR/insert.sh"       
     source "$DIR/delete.sh"
     source "$DIR/select.sh"
-    
+    source "$DIR/update.sh"
+
     
     while true; do
         clear
@@ -89,7 +90,8 @@ table_menu() {
                 read -p "  Press Enter to continue..."
                 ;;
             6)
-                 read -p "  Press Enter to continue..."
+                update_table  
+                read -p "  Press Enter to continue..."
                 ;;
             7)
                 delete_from_table

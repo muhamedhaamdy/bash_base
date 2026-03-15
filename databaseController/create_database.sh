@@ -40,5 +40,5 @@ create_database() {
     tput setaf 2; tput bold
     center "  Database '$db_name' created successfully!"
     tput sgr0
-    read -p "  Press Enter to continue..."
+    sleep 1.5
 }

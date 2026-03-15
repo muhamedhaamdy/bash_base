@@ -44,7 +44,7 @@ delete_database() {
         tput setaf 2; tput bold
         center "  Database '$db_name' deleted successfully!"
         tput sgr0
-        read -p "  Press Enter to continue..."
+        sleep 1.5
     else
         tput setaf 1; tput bold
         center "  Database deletion cancelled."
